@@ -1,0 +1,26 @@
+You are given a 0-indexed string array words.
+
+Two strings are similar if they consist of the same characters.
+
+For example, "abca" and "cba" are similar since both consist of characters 'a', 'b', and 'c'.
+However, "abacba" and "bcfd" are not similar since they do not consist of the same characters.
+Return the number of pairs (i, j) such that 0 <= i < j <= word.length - 1 and the two strings words[i] and words[j] are similar.
+
+class Solution {
+    public int similarPairs(String[] words) {
+        int count = 0;
+        for(int i=0; i<words.length-1; i++){
+            for(int j=i+1; j<words.length; j++){
+                count += check(words[i], words[j]);
+            }
+        }
+        return count;
+    }
+    private int check(String s, String t){
+        Set sset = new HashSet();
+        for(char c: s.toCharArray())    sset.add(c);
+        Set tset = new HashSet();
+        for(char c: t.toCharArray())    tset.add(c);
+        return sset.equals(tset) ? 1 : 0;
+    }
+}
