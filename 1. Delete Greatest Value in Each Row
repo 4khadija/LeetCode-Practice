@@ -1,0 +1,34 @@
+You are given an m x n matrix grid consisting of positive integers.
+
+Perform the following operation until grid becomes empty:
+
+Delete the element with the greatest value from each row. If multiple such elements exist, delete any of them.
+Add the maximum of deleted elements to the answer.
+
+### Solution
+class Solution {
+    public int deleteGreatestValue(int[][] grid) {
+        int count = 0;
+        int sum = 0;
+        while (count <= grid[0].length) {
+            int rowMax = 0;
+            for (int i = 0; i < grid.length; i++) {
+                int maxJ = 0;
+                for (int j = 0; j < grid[i].length; j++) {
+                    if (grid[i][j] >= grid[i][maxJ] && grid[i][j] != -1) {
+                        maxJ = j;
+                        if (grid[i][maxJ] > rowMax) {
+                            rowMax = grid[i][maxJ];
+                        }
+                    }
+                }
+                grid[i][maxJ] = -1;
+            }
+            count++;
+            sum += rowMax;
+        }
+
+        return sum;
+        
+    }
+}
