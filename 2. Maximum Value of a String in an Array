@@ -1,0 +1,28 @@
+The value of an alphanumeric string can be defined as:
+
+The numeric representation of the string in base 10, if it comprises of digits only.
+The length of the string, otherwise.
+Given an array strs of alphanumeric strings, return the maximum value of any string in strs.
+
+- Solution 
+class Solution {
+    public int maximumValue(String[] strs) {
+        int mval = 0;
+        for (String str : strs) {
+            int val = 0;
+            boolean isNum = true;
+            for (char c : str.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    isNum = false;
+                    break;
+                }
+                val = val * 10 + (c - '0');
+            }
+            if (!isNum) {
+                val = str.length();
+            }
+            mval = Math.max(mval, val);
+        }
+        return mval;
+    }
+}
