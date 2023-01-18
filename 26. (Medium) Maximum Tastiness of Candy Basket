@@ -1,0 +1,28 @@
+You are given an array of positive integers price where price[i] denotes the price of the ith candy and a positive integer k.
+
+The store sells baskets of k distinct candies. The tastiness of a candy basket is the smallest absolute difference of the prices of any two candies in the basket.
+
+Return the maximum tastiness of a candy basket.
+
+class Solution {
+    public int maximumTastiness(int[] price, int k) {
+        Arrays.sort(price);
+    int lo = 0, hi = 1000_000_000;
+    while (lo < hi) {
+        int mid = lo + (hi - lo) / 2;
+        if (check(mid, price, k)) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo - 1;
+}
+boolean check(int x, int[] price, int k) {
+    int last = price[0], count = 1, i = 1;
+    while (count < k && i < price.length) {
+        if (price[i] - last >= x) {
+            last = price[i]; count++;
+        }
+        i++;
+    }
+    return count == k;
+    }
+}
